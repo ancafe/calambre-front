@@ -22,6 +22,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~plugins/mixins/user.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -30,7 +31,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module',
+    // '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
   ],
@@ -39,15 +40,39 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    baseURL: 'http://localhost:8080/api/',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  auth: {
+    // Options
+    strategies: {
+      'laravelJWT': {
+        provider: 'laravel/jwt',
+        url: 'http://localhost:8080/api/',
+        endpoints: {
+          login: {url: 'login', method: 'post', propertyName: 'meta.token'},
+          user: {url: 'me', method: 'get', propertyName: 'data'},
+          refresh: {url: 'refresh', method: 'post'},
+          logout: {url: 'logout', method: 'post', propertyName: 'data'},
+        },
+        token: {
+          property: 'access_token',
+          maxAge: 60 * 60
+        },
+        refreshToken: {
+          maxAge: 20160 * 60
+        },
+      },
+    }
   }
 }
