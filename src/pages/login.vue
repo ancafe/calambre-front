@@ -1,75 +1,86 @@
-// login.vue
-
 <template>
-  <div class="container top">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card">
-          <div class="card-header">Login</div>
-          <div class="card-body">
-            <form @submit.prevent="addUser">
-              <div class="form-group row">
-                <label for="email" class="col-sm-4 col-form-label text-md-right">Email</label>
-                <div class="col-md-6">
-                  <input type="email" v-model="userForm.email" class="form-control" required autofocus>
-                  <span class="invalid-feedback" role="alert">
-                                            <strong></strong>
-                                        </span>
-                </div>
-              </div>
+  <section class="hero is-fullheight is-primary">
+    <div class="hero-body  has-text-centered">
+      <div class="container  column is-half">
+        <div class="box">
 
-              <div class="form-group row">
-                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+          <img src="~/static/logo.png"/>
+          <h2 class="title has-text-centered has-text-dark ">Welcome back!</h2>
 
-                <div class="col-md-6">
-                  <input type="password" v-model="userForm.password" class="form-control" required>
-                  <span class="invalid-feedback" role="alert">
-                                            <strong></strong>
-                                        </span>
-                </div>
-              </div>
+          <Notification :message="error" v-if="error"/>
 
-              <div class="form-group row mb-0">
-                <div class="col-md-8 offset-md-4">
-                  <button type="submit" class="btn btn-primary">
-                    Login
-                  </button>
-                </div>
+          <form method="post" @submit.prevent="login">
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control">
+                <input
+                  type="email"
+                  class="input"
+                  name="email"
+                  v-model="email"
+                />
               </div>
-            </form>
+            </div>
+            <div class="field">
+              <label class="label">Password</label>
+              <div class="control">
+                <input
+                  type="password"
+                  class="input"
+                  name="password"
+                  v-model="password"
+                />
+              </div>
+            </div>
+            <div class="control">
+              <button type="submit" class="button is-dark is-fullwidth">Log In</button>
+            </div>
+          </form>
+          <div class="has-text-centered" style="margin-top: 20px">
+            <p>
+              Don't have an account?
+              <nuxt-link to="/register">Register</nuxt-link>
+            </p>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
+import Notification from '~/components/Notification'
+
 export default {
+  components: {
+    Notification,
+  },
+
+  middleware: "guest",
+  layout: "blank",
+
   data() {
     return {
-      userForm: {
-        email: '',
-        password: ''
-      }
+      email: '',
+      password: '',
+      error: null
     }
   },
+
   methods: {
-    async addUser() {
-      await this.$auth.login({
-        data: this.userForm
-      });
-      this.$router.push({
-        path: '/'
-      });
+    async login() {
+      try {
+        await this.$auth.loginWith('laravelJWT', {
+          data: {
+            email: this.email,
+            password: this.password
+          }
+        })
+        this.$router.push('/')
+      } catch (e) {
+        this.error = e.response.data.message
+      }
     }
   }
 }
 </script>
-
-<style>
-.top {
-  margin-top: 80px;
-}
-</style>
-

@@ -4,16 +4,16 @@ import Vue from 'vue'
 import { mapGetters } from 'vuex'
 
 const User = {
-  install (Vue, Options) {
+  install(Vue, options) {
     Vue.mixin({
       computed: {
         ...mapGetters({
-          user: 'auth/user',
-          loggedIn: 'auth/loggedIn'
+          user: 'user',
+          loggedId: 'loggedId'
         })
       }
     })
   }
-}
+};
 
 Vue.use(User);
