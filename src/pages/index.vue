@@ -9,6 +9,13 @@
           <Supply/>
         </div>
       </div>
+      <hr>
+      <div class="bar-chart">
+        <client-only>
+          <ExampleChart />
+        </client-only>
+
+      </div>
     </div>
   </section>
 </template>
@@ -16,11 +23,21 @@
 
 <script>
 import {mapGetters} from 'vuex'
+import ExampleChart from "~/components/Chart/ExampleChart";
 
 export default {
+  components: {ExampleChart},
   middleware: ["auth"],
   computed: {
     ...mapGetters(['loggedInUser'])
-  }
+  },
 }
 </script>
+<style scoped>
+.bar-chart {
+  width: 80%;
+  height: 80%;
+  margin: auto;
+  margin-top: 30px;
+}
+</style>

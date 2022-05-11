@@ -24,6 +24,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~plugins/mixins/user.js',
+    { src : '~/plugins/vue-apexcharts.js', ssr : false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -52,7 +53,8 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+  },
 
   auth: {
     // Options
