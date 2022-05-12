@@ -13,6 +13,7 @@
       <div class="bar-chart">
         <client-only>
           <ExampleChart />
+          <WeeklyChartByPeriod />
         </client-only>
 
       </div>
@@ -24,9 +25,10 @@
 <script>
 import {mapGetters} from 'vuex'
 import ExampleChart from "~/components/Chart/ExampleChart";
+import WeeklyChartByPeriod from "~/components/Chart/WeeklyChartByPeriod";
 
 export default {
-  components: {ExampleChart},
+  components: {WeeklyChartByPeriod, ExampleChart},
   middleware: ["auth"],
   computed: {
     ...mapGetters(['loggedInUser'])
