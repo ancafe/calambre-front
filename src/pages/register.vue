@@ -50,8 +50,8 @@
                 <input
                   type="password"
                   class="input"
-                  name="password_confirm"
-                  v-model="password_confirm"
+                  name="password_confirmation"
+                  v-model="password_confirmation"
                   required
                 />
               </div>
@@ -84,7 +84,7 @@ export default {
       name: '',
       email: '',
       password: '',
-      password_confirm: '',
+      password_confirmation: '',
       error: null
     }
   },
@@ -98,7 +98,7 @@ export default {
           name: this.name,
           email: this.email,
           password: this.password,
-          password_confirm: this.password_confirm
+          password_confirmation: this.password_confirmation
         })
 
         await this.$auth.loginWith('local', {
@@ -107,8 +107,8 @@ export default {
             password: this.password
           },
         })
-
         this.$router.push('/')
+
       } catch (e) {
         let theError = e.response.data.msg[0]
         this.error = theError.description

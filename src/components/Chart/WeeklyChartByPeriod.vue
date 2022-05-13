@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <client-only>
@@ -11,8 +10,9 @@
 export default {
   data: () => ({
     total: 0,
+    cups: null,
     chartOptions: {
-      colors:[
+      colors: [
         '#c4dd8c',
         '#96b633',
         '#f2970f',
@@ -60,9 +60,10 @@ export default {
     },
     series: []
   }),
+  props: ['supply'],
   methods: {
     uChart: function () {
-      this.$axios.$get('/supply/4796d3c9-5215-440b-bc96-af00a8136f1c/data/lastWeek/')
+      this.$axios.$get('/supply/'+ this.supply.id +'/data/lastWeek/')
         .then(response => {
           console.log(response.msg.data);
           this.$refs.weekly.updateSeries(response.msg.data)
@@ -81,6 +82,7 @@ export default {
   font-size: 2rem;
   color: #333333;
 }
+
 .total {
   display: inline-block;
 }
