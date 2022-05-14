@@ -2,10 +2,12 @@
   <div>
     <client-only>
       <date-picker
-        placeholder="dd/MM/YYYY"
-        format="dd/MM/yyyy"
+        placeholder="YYYY"
+        format="yyyy"
         v-model="date_selected"
         :disabled-dates="disabled_dates"
+        minimum-view="year"
+        maximum-view="year"
         :monday-first="true"
       />
       <Apexchart max-width="300" :options="chartOptions" :series="series" ref="daily"></Apexchart>
@@ -72,7 +74,7 @@ export default {
   methods: {
     uChart: function () {
       let day = this.$moment(this.date_selected);
-      this.$axios.$get('/supply/' + this.supply.id + '/data/' + day.format("YYYY-MM-DD") + '/')
+      this.$axios.$get('/supply/' + this.supply.id + '/data/months/'+ day.format("YYYY") + '/')
         .then(response => {
           this.$refs.daily.updateSeries(response.msg.data)
         });
@@ -92,7 +94,7 @@ export default {
       to: firstDate.toDate(),
       from: lastDate.toDate()
     },
-      this.uChart()
+    this.uChart()
   },
 }
 </script>

@@ -25,7 +25,6 @@
             <li @click="setTab('d')" :class="active_tab === 'd' ? 'is-active' : ''"><a>Daily</a></li>
             <li @click="setTab('w')" :class="active_tab === 'w' ? 'is-active' : ''"><a>Weekly</a></li>
             <li @click="setTab('m')" :class="active_tab === 'm' ? 'is-active' : ''"><a>Monthly</a></li>
-            <li @click="setTab('s')" :class="active_tab === 's' ? 'is-active' : ''"><a>Stationary</a></li>
             <li @click="setTab('c')" :class="active_tab === 'c' ? 'is-active' : ''"><a>Consumption profile</a></li>
           </ul>
         </div>
@@ -37,6 +36,7 @@
           <client-only>
             <DailyChart v-if="active_tab == 'd'" :supply="supply"/>
             <WeeklyChartByPeriod v-if="active_tab == 'w'" :supply="supply"/>
+            <MonthlyChart v-if="active_tab == 'm'" :supply="supply"/>
           </client-only>
         </div>
       </div>
@@ -52,6 +52,7 @@ import {mapGetters} from 'vuex'
 import ExampleChart from "~/components/Chart/ExampleChart";
 import WeeklyChartByPeriod from "~/components/Chart/WeeklyChartByPeriod";
 import DailyChart from "~/components/Chart/DailyChart";
+import MonthlyChart from "~/components/Chart/MonthlyChart";
 
 
 export default {
@@ -60,7 +61,7 @@ export default {
     last_day: null,
     active_tab: 'd',
   }),
-  components: {WeeklyChartByPeriod, DailyChart, ExampleChart},
+  components: {WeeklyChartByPeriod, DailyChart, ExampleChart, MonthlyChart},
   middleware: ["auth"],
   computed: {},
   methods: {
