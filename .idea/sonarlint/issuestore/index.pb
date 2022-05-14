@@ -29,5 +29,13 @@ M
 :
 
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
+F
+src/pages/register.vue,9/8/983638328bfb17afcc4ad48bc172321c8679c1cc
+I
+src/components/Supply.vue,a/e/ae636b9de130b79b437b37881ce50570da963188
+W
+'src/components/Sidebar/menu_entries.vue,7/b/7b65e2423542a3dd35d6530ddfc20763a8379589
+C
+src/pages/login.vue,8/e/8ebeb6ae654da66efa3b70e6f8b2fdd17419c2a0
 U
 %src/components/Chart/ExampleChart.vue,e/a/ea060919c61c6895128b9a09ae2cd353a9fe3d47

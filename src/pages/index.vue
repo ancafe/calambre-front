@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <div class="container" v-if="loggedInUser.edis">
+    <div class="container" v-if="loggedInUser.msg.user.edis">
       <h1 class="title">My power consumption</h1>
       <hr>
       <h2 class="subtitle">List of supplies</h2>
@@ -9,23 +9,6 @@
           <Supply :supply="supply"/>
         </div>
       </div>
-    </div>
-    <div class="container" v-else>
-      <div class="columns">
-        <div class="column is-half">
-          <article class="message is-info">
-            <div class="message-header">
-              Hi!
-            </div>
-
-            <div class="message-body">
-              You doesn't have any EDIS information stored in Calambre. Please, go to your Profile page to set your own
-              credentials. This information it's stored encrypted and any attack to database can't be enough to decrypt.
-            </div>
-          </article>
-        </div>
-      </div>
-
     </div>
   </section>
 </template>

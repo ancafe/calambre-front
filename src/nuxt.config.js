@@ -25,6 +25,7 @@ export default {
   plugins: [
     '~plugins/mixins/user.js',
     { src : '~/plugins/vue-apexcharts.js', ssr : false },
+    { src: '~/plugins/datepicker.js', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -32,11 +33,9 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    // https://go.nuxtjs.dev/eslint
     // '@nuxtjs/eslint-module',
-    // https://go.nuxtjs.dev/tailwindcss
-    // '@nuxtjs/tailwindcss',
     '@nuxtjs/fontawesome',
+    '@nuxtjs/moment',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
