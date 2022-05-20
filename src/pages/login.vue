@@ -70,6 +70,7 @@ export default {
   methods: {
     async login() {
       try {
+        this.error = null;
         await this.$auth.loginWith('laravelJWT', {
           data: {
             email: this.email,
@@ -78,7 +79,10 @@ export default {
         })
         this.$router.push('/')
       } catch (e) {
-        this.error = e.response.data.message
+        this.error = [];
+        e.response.data.msg.forEach(error => {
+          this.error.push(error);
+        });
       }
     }
   }

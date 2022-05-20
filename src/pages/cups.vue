@@ -72,7 +72,6 @@ export default {
   mounted: function () {
     this.supply = this.$route.params.supply
     this.last_day = this.$moment(this.supply.last_data).format("DD/MM/YYYY HH:mm")
-
   },
 }
 </script>

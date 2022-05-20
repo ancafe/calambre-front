@@ -94,6 +94,7 @@ export default {
   methods: {
     async register() {
       try {
+        this.error = null
         await this.$axios.post('register', {
           name: this.name,
           email: this.email,
@@ -101,17 +102,19 @@ export default {
           password_confirmation: this.password_confirmation
         })
 
-        await this.$auth.loginWith('local', {
+        await this.$auth.loginWith('laravelJWT', {
           data: {
             email: this.email,
             password: this.password
-          },
+          }
         })
         this.$router.push('/')
 
       } catch (e) {
-        let theError = e.response.data.msg[0]
-        this.error = theError.description
+        this.error = []
+        e.response.data.msg.forEach(error => {
+          this.error.push(error);
+        });
       }
     }
   }
