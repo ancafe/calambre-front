@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!seen && !loggedInUser.msg.user.edis" class="notification is-warning">
+  <div v-if="loggedInUser && !seen && !loggedInUser.msg.user.edis" class="notification is-warning">
     <div class="container">
       You doesn't have any EDIS information stored in Calambre. Please, go to your <router-link to="/profile" class="button is-secondary is-small">Profile</router-link> page to set your own
       credentials. This information it's stored encrypted and any attack to database can't be enough to decrypt.

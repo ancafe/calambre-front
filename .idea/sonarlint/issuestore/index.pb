@@ -1,9 +1,4 @@
 
-:
-
-Dockerfile,6/6/6651ddff6eb82c840ced7c1dddee15c6e1913dd4
-B
-docker-compose.yml,3/5/35b8c13cf2eb2a194eada000eb310d65aed53b2a
 =
 src/README.md,8/3/83aa3445a7f65c488e8ccd0a5ad0e80c174dc329
 F
@@ -26,11 +21,6 @@ M
 src/plugins/vue-apexcharts.js,4/5/453bcfbe26bb610526c33166bc2c181b43075690
 >
 src/.gitignore,9/3/93cbdd0973c9a7b59e5cef90a94300ab95fd66e5
-:
-
-.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
-F
-src/pages/register.vue,9/8/983638328bfb17afcc4ad48bc172321c8679c1cc
 I
 src/components/Supply.vue,a/e/ae636b9de130b79b437b37881ce50570da963188
 W
@@ -45,9 +35,11 @@ E
 src/package-lock.json,9/d/9d2843f49b8539466357f2d3234b3ef834659f6b
 C
 src/pages/index.vue,b/e/be30d7628d1a64ba4bfc59e272ca27eb2461568b
-T
-$src/components/Sidebar/AlertEdis.vue,2/c/2c0409572008a84f2051d3ccfdd0c05a7bfa0949
 @
 src/package.json,0/9/090e8e2bc1b00eafabafcb1e5b232abec99b73d3
 K
 src/pages/graphs/weekly.vue,3/9/397c22741796be5ba31c781bd039c6e8b1871652
+J
+src/pages/graphs/daily.vue,e/2/e218845f1d46cfee5f511fea0e742dd3528d4bdb
+B
+src/pages/cups.vue,6/a/6af47d5e3be0e1e6b46aef2ad08b7068da167484
