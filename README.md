@@ -21,4 +21,6 @@ cd calambre-front
 docker compose up
 ```
 
-2. Nothing more! 
+2. Nothing more! You can enter now in the local server:
+
+[http://localhost:3000](http://localhost:3000)
