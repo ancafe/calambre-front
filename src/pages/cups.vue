@@ -20,7 +20,7 @@
         <hr>
         <h2 class="subtitle">Supply address: {{ supply.provisioning_address }}</h2>
 
-        <div class="tabs is-centered">
+        <div class="tabs is-centered" v-if="!empty">
           <ul>
             <li @click="setTab('d')" :class="active_tab === 'd' ? 'is-active' : ''"><a>Daily</a></li>
             <li @click="setTab('w')" :class="active_tab === 'w' ? 'is-active' : ''"><a>Weekly</a></li>
@@ -31,7 +31,7 @@
       </div>
 
 
-      <div class="container">
+      <div class="container" v-if="!empty">
         <div class="bar-chart">
           <client-only>
             <DailyChart v-if="active_tab == 'd'" :supply="supply"/>
@@ -40,6 +40,25 @@
           </client-only>
         </div>
       </div>
+
+      <div class="container" v-if="empty">
+        <hr>
+        <article class="message">
+          <div class="message-header">
+            <p>No data</p>
+          </div>
+          <div class="message-body">
+            There aren't any measure for this supply. Please, try to get some information pressing the following button
+              <div class="button is-ight is-outline " @click="readMeasures"
+                    v-bind:class="{ 'is-loading': loading }">
+                <span><FontAwesomeIcon :icon="['fas', 'arrows-rotate']"/> Read measures from e-distribucion</span>
+              </div>
+          </div>
+        </article>
+
+      </div>
+
+
     </section>
 
   </div>
@@ -60,6 +79,8 @@ export default {
     supply: {},
     last_day: null,
     active_tab: 'd',
+    empty: false,
+    loading: false,
   }),
   components: {WeeklyChartByPeriod, DailyChart, ExampleChart, MonthlyChart},
   middleware: ["auth"],
@@ -68,9 +89,22 @@ export default {
     setTab: function(status) {
       this.active_tab = status
     },
+    readMeasures: function () {
+      let contract = this.supply.contracts[0].id;
+      let toDate = this.$moment()
+      let fromDate = this.$moment().subtract(2,'years');
+
+      this.$axios.$get('/contract/'+contract+'/measure/'+fromDate.format("YYYY-MM-DD")+'/'+toDate.format("YYYY-MM-DD")+'/')
+        .then(response => {
+          console.log(response.msg)
+        });
+    },
   },
   mounted: function () {
     this.supply = this.$route.params.supply
+    if (this.supply.last_data === null){
+      this.empty = true;
+    }
     this.last_day = this.$moment(this.supply.last_data).format("DD/MM/YYYY HH:mm")
   },
 }
